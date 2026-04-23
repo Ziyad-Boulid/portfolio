@@ -1,3 +1,11 @@
+Here is the complete code.
+
+**The specific change for your request:**
+In the CSS, I added `order: -1;` to the `.hero-visual` inside the mobile `@media` query. This forces the picture to appear **first** (at the top) on mobile screens, while keeping it on the **right** side for desktop screens.
+
+I have also included all the mobile improvements (full-width buttons, stacked contact links, centered text) to make the phone version look excellent.
+
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -35,21 +43,21 @@
     .skip-link:focus-visible{transform:translateY(0);}
 
     #three-canvas{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none;}
-    .content-wrapper{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 24px;}
+    .content-wrapper{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 20px;}
     main{display:block;}
 
-    section{display:flex;flex-direction:column;justify-content:center;padding:56px 0;}
-    #hero{min-height:100vh;padding:72px 0;}
+    section{display:flex;flex-direction:column;justify-content:center;padding:60px 0;}
+    #hero{min-height:100vh;padding:80px 0;}
     .js.reveals-enabled section{opacity:0;transform:translateY(40px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out);}
     .js.reveals-enabled section.visible{opacity:1;transform:translateY(0);}
 
     h1,h2,h3{font-family:var(--font-display);font-weight:700;letter-spacing:-0.02em;}
-    h1{font-size:clamp(2.8rem,6vw,5rem);line-height:1.1;margin-bottom:16px;}
-    h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:28px;position:relative;display:inline-block;}
+    h1{font-size:clamp(2.5rem,8vw,5rem);line-height:1.1;margin-bottom:16px;}
+    h2{font-size:clamp(1.8rem,5vw,3rem);margin-bottom:28px;position:relative;display:inline-block;}
     h2::after{content:'';position:absolute;bottom:-8px;left:0;width:60px;height:4px;background:var(--accent);border-radius:2px;}
     h3{font-size:1.5rem;margin-bottom:8px;}
 
-    /* === UPDATED HERO LAYOUT === */
+    /* === HERO LAYOUT === */
     .hero-inner{
       display:flex;
       align-items:center;
@@ -152,46 +160,259 @@
     .drag-hint{position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);width:min(100%,320px);text-align:center;font-size:11px;color:var(--text-secondary);opacity:.8;font-family:var(--font-body);}
     footer{padding:40px 0;text-align:center;color:var(--text-secondary);font-size:.9rem;border-top:1px solid var(--border);margin-top:60px;}
 
-    /* === RESPONSIVE BREAKPOINTS === */
+    /* === TABLET & MOBILE BREAKPOINT === */
     @media(max-width:992px){
       .hero-inner{
         flex-direction:column;
-        gap:40px;
+        gap:50px;
       }
       .hero-visual{
+        width:75vw;
         max-width:360px;
-        width:80vw;
+        min-width:280px;
+        /* order: -1 puts the image ABOVE the text on mobile */
+        order:-1; 
       }
       .hero-text{
         text-align:center;
+        max-width:100%;
+        min-width:0;
+        order:1;
+      }
+      .hero-text p{
         max-width:100%;
       }
       .contact-links{
         justify-content:center;
       }
+      .content-wrapper{
+        padding:0 24px;
+      }
     }
 
+    /* === MOBILE BREAKPOINT === */
     @media(max-width:768px){
-      .content-wrapper{padding:0 18px;}
-      h1{font-size:2.5rem;}
-      h2{font-size:2rem;}
-      .grid-2{grid-template-columns:1fr;}
-      section{padding:40px 0;}
-      #hero{padding:56px 0;}
-      .hero-text{min-width:0;}
-      .contact-links{gap:12px;}
-      .contact-item{width:100%;}
-      .drag-hint{bottom:-48px;}
-      .project-card::after{right:20px;bottom:18px;}
-      .project-card p{padding-right:0;}
-      .project-modal__dialog{padding:24px 20px 20px;}
-      .project-modal__grid{grid-template-columns:1fr;}
+      .content-wrapper{
+        padding:0 16px;
+      }
+      
+      #hero{
+        padding:60px 0 40px;
+        min-height:auto;
+      }
+      
+      h1{
+        font-size:clamp(2.2rem,9vw,3.5rem);
+        margin-bottom:12px;
+      }
+      
+      h2{
+        font-size:clamp(1.6rem,6vw,2.4rem);
+        margin-bottom:24px;
+      }
+      
+      .hero-inner{
+        gap:40px;
+      }
+      
+      .hero-visual{
+        width:85vw;
+        max-width:320px;
+        min-width:260px;
+        --photo-size:180px;
+        --orbit-1-size:240px;
+        --orbit-2-size:310px;
+        --orb-size:40px;
+        --orb-font-size:9px;
+      }
+      
+      .drag-hint{
+        font-size:10px;
+        bottom:-35px;
+      }
+      
+      .hero-text p{
+        font-size:clamp(1rem,4vw,1.2rem)!important;
+        margin-bottom:24px!important;
+      }
+      
+      .btn{
+        width:100%;
+        padding:16px 24px;
+        font-size:1.05rem;
+      }
+      
+      /* Stack contact links vertically on mobile for better touch targets */
+      .contact-links{
+        flex-direction:column;
+        gap:12px;
+        width:100%;
+        align-items:stretch;
+      }
+      
+      .contact-item{
+        width:100%;
+        justify-content:center;
+        padding:12px;
+        background:var(--surface);
+        border-radius:10px;
+        border:1px solid var(--border);
+      }
+      
+      section{
+        padding:50px 0;
+      }
+      
+      .grid-2{
+        grid-template-columns:1fr;
+        gap:20px;
+      }
+      
+      .card{
+        padding:24px 20px;
+        margin-bottom:20px;
+      }
+      
+      .project-card::after{
+        right:20px;
+        bottom:20px;
+        font-size:0.8rem;
+      }
+      
+      .project-card p{
+        padding-right:0;
+      }
+      
+      .tag{
+        padding:5px 12px;
+        font-size:0.8rem;
+        margin:3px;
+      }
+      
+      .project-modal__dialog{
+        padding:24px 20px 20px;
+        margin:16px;
+        width:calc(100vw - 32px);
+      }
+      
+      .project-modal__grid{
+        grid-template-columns:1fr;
+        gap:18px;
+      }
+      
+      .project-modal__head{
+        padding-right:50px;
+      }
+      
+      .project-modal__close{
+        width:38px;
+        height:38px;
+        top:14px;
+        right:14px;
+      }
     }
 
+    /* === SMALL MOBILE === */
     @media(max-width:480px){
-      .card{padding:22px;}
-      .btn{width:100%;}
-      .hero-visual{width:min(320px,90vw);}
+      .content-wrapper{
+        padding:0 14px;
+      }
+      
+      #hero{
+        padding:50px 0 30px;
+      }
+      
+      h1{
+        font-size:clamp(2rem,10vw,3rem);
+      }
+      
+      h2{
+        font-size:clamp(1.5rem,7vw,2.2rem);
+      }
+      
+      h3{
+        font-size:1.3rem;
+      }
+      
+      .hero-visual{
+        width:95vw;
+        max-width:280px;
+        min-width:240px;
+        --photo-size:150px;
+        --orbit-1-size:200px;
+        --orbit-2-size:260px;
+        --orb-size:36px;
+        --orb-font-size:8px;
+      }
+      
+      .drag-hint{
+        display:none;
+      }
+      
+      .btn{
+        padding:15px 20px;
+        font-size:1rem;
+      }
+      
+      .card{
+        padding:20px 18px;
+        border-radius:14px;
+      }
+      
+      .contact-item{
+        font-size:0.95rem;
+        padding:12px;
+      }
+      
+      section{
+        padding:40px 0;
+      }
+      
+      .grid{
+        gap:18px;
+      }
+      
+      footer{
+        padding:30px 0;
+        font-size:0.85rem;
+        margin-top:40px;
+      }
+      
+      .project-modal__dialog{
+        padding:20px 16px 16px;
+        margin:12px;
+        border-radius:20px;
+      }
+      
+      .project-modal__title{
+        font-size:1.5rem;
+      }
+      
+      .project-modal__status{
+        font-size:0.75rem;
+        padding:5px 10px;
+      }
+    }
+
+    /* === EXTRA SMALL MOBILE === */
+    @media(max-width:360px){
+      h1{
+        font-size:1.9rem;
+      }
+      
+      .hero-visual{
+        width:100%;
+        max-width:260px;
+        --photo-size:130px;
+        --orbit-1-size:180px;
+        --orbit-2-size:230px;
+        --orb-size:32px;
+        --orb-font-size:7px;
+      }
+      
+      .btn{
+        padding:14px 18px;
+      }
     }
 
     @media(prefers-reduced-motion:reduce){
@@ -228,8 +449,9 @@
         <div class="orbit-ring orbit-ring-2"></div>
         <div class="orbit-ring orbit-ring-1"></div>
         <div class="photo-wrap">
-          <img src="profile-photo.jpg" alt="Portrait de Ziyad BOULID" decoding="async" fetchpriority="high">
+          <img src="./profile-photo.jpg" alt="Portrait de Ziyad BOULID" decoding="async" fetchpriority="high">
         </div>
+        <p class="drag-hint">Faites glisser les bulles ou utilisez les flèches du clavier. Entrée recentre la bulle.</p>
       </div>
     </div>
   </section>
@@ -346,7 +568,7 @@
         </div>
         <div style="flex:1;min-width:200px;">
           <p style="color:var(--text-secondary);margin-bottom:8px;font-weight:500;">Langues</p>
-          <p>🇲🇦 Arabe (Maternelle) • 🇫🇷 Français (Courant) • 🇬🇧 Anglais (Intermédiaire) • 🇩🇪 Allemand (Notions)</p>
+          <p>🇲🇦 Arabe (Maternelle) • 🇫 Français (Courant) • 🇧 Anglais (Intermédiaire) • 🇩 Allemand (Notions)</p>
         </div>
       </div>
     </div>
@@ -1019,3 +1241,4 @@ initOrbitSystem();
 </script>
 </body>
 </html>
+```
